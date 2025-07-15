@@ -798,7 +798,7 @@ input {
 } */   
 
 
-
+/* 
 
 html, body {
   height: 100%;
@@ -865,6 +865,122 @@ body {
 }
 
 /* Placeholder style */
+/* input::placeholder {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #090808;
+  opacity: 0.8;
+}
+
+input {
+  font-size: 1.7rem;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+/* Chat bubble base */
+/* .chat-bubble {
+  margin: 8px 10px;
+  padding: 10px 10px;
+  font-size: 1.4rem;
+  border-radius: 2rem;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chat-bubble:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Sender styles */
+/* .user-message {
+  background: linear-gradient(to right, #1d4ed8, #3b82f6);
+  color: white;
+  border: 1px solid #1669cf;
+}
+
+.ai-message {
+  background: linear-gradient(to right, #374151, #1f2937);
+  color: white;
+  border: 1px solid #6b7280;
+}
+
+ */ 
+
+
+
+
+
+
+
+
+
+
+ html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  background: linear-gradient(to bottom right, #1e1b4b, #111827, #000000);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s ease-out;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 input::placeholder {
   font-size: 1rem;
   font-weight: 500;
@@ -880,9 +996,9 @@ input {
 
 /* Chat bubble base */
 .chat-bubble {
-  margin: 8px 20px;
-  padding: 18px 28px;
-  font-size: 1.2rem;
+  margin: 8px 10px;
+  padding: 10px 10px;
+  font-size: 1.4rem;
   border-radius: 2rem;
   box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -905,3 +1021,27 @@ input {
   color: white;
   border: 1px solid #6b7280;
 }
+
+/* === New feature styles: options box === */
+.option-box {
+  background-color: #53536d; /* zinc-800 */
+  color: white;
+  padding: 1.4rem;
+  font-size: 1.4rem;
+  border-radius: 1.4rem;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.option-box:hover {
+  background-color: #3f3f46; /* zinc-700 */
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+

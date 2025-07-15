@@ -707,13 +707,1409 @@
 
 
 
+// import React, { useState, useEffect, useRef } from 'react';
+// import './App.css';
+
+// const App = () => {
+//   const [message, setMessage] = useState('');
+//   const [chatHistory, setChatHistory] = useState([]);
+//   const [isChatActive, setIsChatActive] = useState(true);
+//   const [loading, setLoading] = useState(false);
+//   const [conversationId, setConversationId] = useState(null);
+//   const chatContainerRef = useRef(null);
+
+//   useEffect(() => {
+//     if (chatContainerRef.current) {
+//       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+//     }
+//   }, [chatHistory]);
+
+//   // useEffect(() => {
+//   //   if (!conversationId) {
+//   //     setConversationId(Date.now().toString());
+//   //   }
+//   // }, [conversationId]);
+
+//   useEffect(() => {
+//     const storedId = localStorage.getItem("conversationId");
+//     if (!storedId) {
+//       const newId = Date.now().toString();
+//       localStorage.setItem("conversationId", newId);
+//       setConversationId(newId);
+//     } else {
+//       setConversationId(storedId);
+//     }
+//   }, []);
+
+//   const sendMessage = async (event) => {
+//     event.preventDefault();
+//     if (message.trim() === '') return;
+
+//     setLoading(true);
+//     setChatHistory((prevHistory) => [
+//       ...prevHistory,
+//       { sender: 'user', text: message },
+//     ]);
+
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ message, role: 'user', conversation_id: conversationId }),
+//       });
+
+//       if (!response.ok) throw new Error('Error with API request');
+
+//       const data = await response.json();
+//       setChatHistory((prevHistory) => [
+//         ...prevHistory,
+//         { sender: 'ai', text: data.response },
+//       ]);
+//       setMessage('');
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="bg-gradient-to-br from-purple-900 via-gray-950 to-black min-h-screen flex items-center justify-center py-10 px-4">
+//       <div className="w-full max-w-[650px] max-h-[95vh] bg-opacity-90 bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-800 p-6 sm:p-8 backdrop-blur-md flex flex-col">
+//         <div className="flex items-center justify-between mb-6">
+//           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-widest animate-fade-in drop-shadow-md ml-[10px]">
+//             PaulBot 🤖
+//           </h1>
+//         </div>
+
+//         <div
+//           ref={chatContainerRef}
+//           className="overflow-y-auto flex-grow bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-xl p-5 space-y-6 border border-zinc-700 shadow-inner scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent"
+//         >
+//           {chatHistory.map((msg, index) => (
+//             <div
+//               key={index}
+//               className={`w-full flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-up`}
+//             >
+//               <div className={`${msg.sender === 'user' ? 'user-message' : 'ai-message'} chat-bubble`}>
+//                 <p>{msg.text}</p>
+//               </div>
+//             </div>
+//           ))}
+
+//           {loading && (
+//             <div className="flex justify-start animate-pulse">
+//               <div className="max-w-xs px-4 py-2 rounded-xl bg-gray-900 text-white shadow-md">
+//                 AI is typing🤔
+//               </div>
+//             </div>
+//           )}
+//         </div>
+
+//         {isChatActive && (
+//           <form
+//             onSubmit={sendMessage}
+//             className="mt-4 flex flex-row items-center gap-4 animate-fade-in"
+//           >
+//             <input
+//               type="text"
+//               value={message}
+//               onChange={(e) => setMessage(e.target.value)}
+//               className="flex-grow px-10 py-10 ml-[10px] mr=[0px] rounded-2xl bg-zinc-950 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-xl placeholder-gray-400 shadow-inner"
+//               // className="flex-grow px-10 py-7 rounded-2xl bg-zinc-950 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-base placeholder-gray-500 shadow-inner"
+//               placeholder="Ask something..."
+//             />
+
+//             <button
+//               type="submit"
+//               disabled={loading || !message.trim()}
+//               className="focus:outline-none bg-transparent p-0 m-0 border-none"
+//             >
+//               <img
+//                 src="/img.png"
+//                 // alt="Send"
+//                 className="w-[55px] h-[80px] ml-[0px] mr=[10px] object-contain hover:scale-105 transition-transform duration-200"
+//                 style={{
+//                   border: 'none',
+//                   background: 'transparent',
+//                   padding: 0,
+//                   margin: 0,
+//                   boxShadow: 'none',
+//                 }}
+//               />
+//             </button>
+//           </form>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect, useRef } from 'react';
+// import './App.css';
+
+// const options = [
+//   "International Money Transfer",
+//   "Domestic Money Transfer",
+//   "Foreign Exchange",
+//   "Gold Loan Services",
+//   "Tours & Travel Services",
+//   "Utility & Bill Payments",
+//   "Paul Merchants Franchise/Partner Program",
+//   "Paul Pay App Support",
+//   "KYC and Account Verification",
+//   "Others"
+// ];
+
+// const App = () => {
+//   const [message, setMessage] = useState('');
+//   const [chatHistory, setChatHistory] = useState([]);
+//   const [isChatActive, setIsChatActive] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [conversationId, setConversationId] = useState(null);
+//   const chatContainerRef = useRef(null);
+
+//   useEffect(() => {
+//     if (chatContainerRef.current) {
+//       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+//     }
+//   }, [chatHistory]);
+
+//   useEffect(() => {
+//     const storedId = localStorage.getItem("conversationId");
+//     if (!storedId) {
+//       const newId = Date.now().toString();
+//       localStorage.setItem("conversationId", newId);
+//       setConversationId(newId);
+//     } else {
+//       setConversationId(storedId);
+//     }
+//   }, []);
+
+//   const sendMessage = async (event) => {
+//     event.preventDefault();
+//     if (message.trim() === '') return;
+
+//     setLoading(true);
+//     setChatHistory((prevHistory) => [
+//       ...prevHistory,
+//       { sender: 'user', text: message },
+//     ]);
+
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ message, role: 'user', conversation_id: conversationId }),
+//       });
+
+//       if (!response.ok) throw new Error('Error with API request');
+
+//       const data = await response.json();
+//       setChatHistory((prevHistory) => [
+//         ...prevHistory,
+//         { sender: 'ai', text: data.response },
+//       ]);
+//       setMessage('');
+//       setIsChatActive(true);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const handleOptionClick = async (option) => {
+//     if (option === "Others") {
+//       setIsChatActive(true);
+//       return;
+//     }
+//     setLoading(true);
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ message: `Tell me about ${option}`, role: 'user', conversation_id: conversationId })
+//       });
+
+//       const data = await response.json();
+//       setChatHistory([{ sender: 'ai', text: data.response }]);
+//       setIsChatActive(true);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="bg-gradient-to-br from-purple-900 via-gray-950 to-black min-h-screen flex items-center justify-center py-10 px-4">
+//       <div className="w-full max-w-[650px] max-h-[95vh] bg-opacity-90 bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-800 p-6 sm:p-8 backdrop-blur-md flex flex-col">
+//         <div className="flex items-center justify-between mb-6">
+//           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-widest animate-fade-in drop-shadow-md ml-[10px]">
+//             PaulBot 🤖
+//           </h1>
+//         </div>
+
+//         {!isChatActive ? (
+//           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+//             {options.map((option, idx) => (
+//               <div
+//                 key={idx}
+//                 className="bg-zinc-800 text-white p-4 rounded-xl text-center cursor-pointer shadow-md transition-transform transform hover:scale-105 hover:bg-zinc-700"
+//                 onClick={() => handleOptionClick(option)}
+//                 title={`Learn more about ${option}`}
+//               >
+//                 {`${idx + 1}. ${option}`}
+//               </div>
+//             ))}
+//           </div>
+//         ) : (
+//           <>
+//             <div
+//               ref={chatContainerRef}
+//               className="overflow-y-auto flex-grow bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-xl p-5 space-y-6 border border-zinc-700 shadow-inner scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent"
+//             >
+//               {chatHistory.map((msg, index) => (
+//                 <div
+//                   key={index}
+//                   className={`w-full flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-up`}
+//                 >
+//                   <div className={`${msg.sender === 'user' ? 'user-message' : 'ai-message'} chat-bubble`}>
+//                     <p>{msg.text}</p>
+//                   </div>
+//                 </div>
+//               ))}
+
+//               {loading && (
+//                 <div className="flex justify-start animate-pulse">
+//                   <div className="max-w-xs px-4 py-2 rounded-xl bg-gray-900 text-white shadow-md">
+//                     AI is typing🤔
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+
+//             <form
+//               onSubmit={sendMessage}
+//               className="mt-4 flex flex-row items-center gap-4 animate-fade-in"
+//             >
+//               <input
+//                 type="text"
+//                 value={message}
+//                 onChange={(e) => setMessage(e.target.value)}
+//                 className="flex-grow px-10 py-10 ml-[10px] mr-[0px] rounded-2xl bg-zinc-950 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-xl placeholder-gray-400 shadow-inner"
+//                 placeholder="Ask something..."
+//               />
+
+//               <button
+//                 type="submit"
+//                 disabled={loading || !message.trim()}
+//                 className="focus:outline-none bg-transparent p-0 m-0 border-none"
+//               >
+//                 <img
+//                   src="/img.png"
+//                   className="w-[55px] h-[80px] ml-[0px] mr=[10px] object-contain hover:scale-105 transition-transform duration-200"
+//                   style={{ border: 'none', background: 'transparent', padding: 0, margin: 0, boxShadow: 'none' }}
+//                 />
+//               </button>
+//             </form>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+
+
+
+
+
+
+// import React, { useState, useEffect, useRef } from 'react';
+// import './App.css';
+
+// const options = [
+//   "International Money Transfer",
+//   "Domestic Money Transfer",
+//   "Foreign Exchange",
+//   "Gold Loan Services",
+//   "Tours & Travel Services",
+//   "Utility & Bill Payments",
+//   "Paul Merchants Franchise/Partner Program",
+//   "Paul Pay App Support",
+//   "KYC and Account Verification",
+//   "Others"
+// ];
+
+// const greetingKeywords = ["hi", "hello", "hey", "good morning", "good evening", "good afternoon"];
+
+// const App = () => {
+//   const [message, setMessage] = useState('');
+//   const [chatHistory, setChatHistory] = useState([]);
+//   const [isChatActive, setIsChatActive] = useState(false);
+//   const [hasWelcomed, setHasWelcomed] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [conversationId, setConversationId] = useState(null);
+//   const chatContainerRef = useRef(null);
+
+//   useEffect(() => {
+//     if (chatContainerRef.current) {
+//       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+//     }
+//   }, [chatHistory]);
+
+//   useEffect(() => {
+//     const storedId = localStorage.getItem("conversationId");
+//     if (!storedId) {
+//       const newId = Date.now().toString();
+//       localStorage.setItem("conversationId", newId);
+//       setConversationId(newId);
+//     } else {
+//       setConversationId(storedId);
+//     }
+//   }, []);
+
+//   const sendMessage = async (event) => {
+//     event.preventDefault();
+//     if (message.trim() === '') return;
+
+//     setLoading(true);
+//     setChatHistory((prevHistory) => [
+//       ...prevHistory,
+//       { sender: 'user', text: message },
+//     ]);
+
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ message, role: 'user', conversation_id: conversationId }),
+//       });
+
+//       if (!response.ok) throw new Error('Error with API request');
+
+//       const data = await response.json();
+//       const newHistory = [
+//         { sender: 'ai', text: data.response },
+//       ];
+
+//       const messageLower = message.toLowerCase();
+//       const isGreeting = greetingKeywords.some(keyword => messageLower.includes(keyword));
+
+//       if (isGreeting && !hasWelcomed) {
+//         newHistory.push({
+//           sender: 'ai',
+//           text:
+//             "What do you want to know about?\n" +
+//             options.map((opt, i) => `${i + 1}. ${opt}`).join("\n")
+//         });
+//         setHasWelcomed(true);
+//         setIsChatActive(false); // show options again
+//       }
+
+//       setChatHistory((prev) => [...prev, ...newHistory]);
+//       setMessage('');
+//       setIsChatActive(true);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const handleOptionClick = async (option) => {
+//     if (option === "Others") {
+//       setIsChatActive(true);
+//       return;
+//     }
+//     setLoading(true);
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ message: `Tell me about ${option}`, role: 'user', conversation_id: conversationId })
+//       });
+
+//       const data = await response.json();
+//       setChatHistory([{ sender: 'ai', text: data.response }]);
+//       setIsChatActive(true);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="bg-gradient-to-br from-purple-900 via-gray-950 to-black min-h-screen flex items-center justify-center py-10 px-4">
+//       <div className="w-full max-w-[650px] max-h-[95vh] bg-opacity-90 bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-800 p-6 sm:p-8 backdrop-blur-md flex flex-col">
+//         <div className="flex items-center justify-between mb-6">
+//           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-widest animate-fade-in drop-shadow-md ml-[10px]">
+//             PaulBot 🤖
+//           </h1>
+//         </div>
+
+//         {!isChatActive ? (
+//           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+//             {options.map((option, idx) => (
+//               <div
+//                 key={idx}
+//                 className="option-box"
+//                 onClick={() => handleOptionClick(option)}
+//                 title={`Learn more about ${option}`}
+//               >
+//                 {`${idx + 1}. ${option}`}
+//               </div>
+//             ))}
+//           </div>
+//         ) : (
+//           <>
+//             <div
+//               ref={chatContainerRef}
+//               className="overflow-y-auto flex-grow bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-xl p-5 space-y-6 border border-zinc-700 shadow-inner scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent"
+//             >
+//               {chatHistory.map((msg, index) => (
+//                 <div
+//                   key={index}
+//                   className={`w-full flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-up`}
+//                 >
+//                   <div className={`${msg.sender === 'user' ? 'user-message' : 'ai-message'} chat-bubble`}>
+//                     <p>{msg.text}</p>
+//                   </div>
+//                 </div>
+//               ))}
+
+//               {loading && (
+//                 <div className="flex justify-start animate-pulse">
+//                   <div className="max-w-xs px-4 py-2 rounded-xl bg-gray-900 text-white shadow-md">
+//                     AI is typing🤔
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+
+//             <form
+//               onSubmit={sendMessage}
+//               className="mt-4 flex flex-row items-center gap-4 animate-fade-in"
+//             >
+//               <input
+//                 type="text"
+//                 value={message}
+//                 onChange={(e) => setMessage(e.target.value)}
+//                 className="flex-grow px-10 py-10 ml-[10px] mr-[0px] rounded-2xl bg-zinc-950 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-xl placeholder-gray-400 shadow-inner"
+//                 placeholder="Ask something..."
+//               />
+
+//               <button
+//                 type="submit"
+//                 disabled={loading || !message.trim()}
+//                 className="focus:outline-none bg-transparent p-0 m-0 border-none"
+//               >
+//                 <img
+//                   src="/img.png"
+//                   className="w-[55px] h-[80px] ml-[0px] mr=[10px] object-contain hover:scale-105 transition-transform duration-200"
+//                   style={{ border: 'none', background: 'transparent', padding: 0, margin: 0, boxShadow: 'none' }}
+//                 />
+//               </button>
+//             </form>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+
+
+
+
+
+// import React, { useState, useEffect, useRef } from 'react';
+// import './App.css';
+
+// const options = [
+//   "International Money Transfer",
+//   "Domestic Money Transfer",
+//   "Foreign Exchange",
+//   "Gold Loan Services",
+//   "Tours & Travel Services",
+//   "Utility & Bill Payments",
+//   "Paul Merchants Franchise/Partner Program",
+//   "Paul Pay App Support",
+//   "KYC and Account Verification",
+//   "Others"
+// ];
+
+// const greetingKeywords = ["hi", "hello", "hey", "good morning", "good evening", "good afternoon"];
+
+// const App = () => {
+//   const [message, setMessage] = useState('');
+//   const [chatHistory, setChatHistory] = useState([]);
+//   const [isChatActive, setIsChatActive] = useState(false);
+//   const [hasWelcomed, setHasWelcomed] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [conversationId, setConversationId] = useState(null);
+//   const chatContainerRef = useRef(null);
+
+//   useEffect(() => {
+//     if (chatContainerRef.current) {
+//       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+//     }
+//   }, [chatHistory]);
+
+//   useEffect(() => {
+//     const storedId = localStorage.getItem("conversationId");
+//     if (!storedId) {
+//       const newId = Date.now().toString();
+//       localStorage.setItem("conversationId", newId);
+//       setConversationId(newId);
+//     } else {
+//       setConversationId(storedId);
+//     }
+//   }, []);
+
+//   const sendMessage = async (event) => {
+//     event.preventDefault();
+//     if (message.trim() === '') return;
+
+//     setLoading(true);
+//     setChatHistory((prevHistory) => [
+//       ...prevHistory,
+//       { sender: 'user', text: message },
+//     ]);
+
+//     const messageLower = message.toLowerCase();
+//     const isGreeting = greetingKeywords.some(keyword => messageLower.includes(keyword));
+
+//     if (isGreeting && !hasWelcomed) {
+//       setHasWelcomed(true);
+//       setIsChatActive(false);
+//       setMessage('');
+//       return;
+//     }
+
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ message, role: 'user', conversation_id: conversationId }),
+//       });
+
+//       if (!response.ok) throw new Error('Error with API request');
+
+//       const data = await response.json();
+//       const newHistory = [
+//         { sender: 'ai', text: data.response },
+//       ];
+
+//       setChatHistory((prev) => [...prev, ...newHistory]);
+//       setMessage('');
+//       setIsChatActive(true);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const handleOptionClick = async (option) => {
+//     if (option === "Others") {
+//       setIsChatActive(true);
+//       return;
+//     }
+//     setLoading(true);
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ message: `Tell me about ${option}`, role: 'user', conversation_id: conversationId })
+//       });
+
+//       const data = await response.json();
+//       setChatHistory([{ sender: 'ai', text: data.response }]);
+//       setIsChatActive(true);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="bg-gradient-to-br from-purple-900 via-gray-950 to-black min-h-screen flex items-center justify-center py-10 px-4">
+//       <div className="w-full max-w-[650px] max-h-[95vh] bg-opacity-90 bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-800 p-6 sm:p-8 backdrop-blur-md flex flex-col">
+//         <div className="flex items-center justify-between mb-6">
+//           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-widest animate-fade-in drop-shadow-md ml-[10px]">
+//             PaulBot 🤖
+//           </h1>
+//         </div>
+
+//         {!isChatActive && hasWelcomed ? (
+//           <>
+//             <h2 className="text-white text-lg font-semibold mb-4 ml-[20px] mr-[20px]">What do you want to know about?</h2>
+//             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+//               {options.map((option, idx) => (
+//                 <div
+//                   key={idx}
+//                   className="option-box"
+//                   onClick={() => handleOptionClick(option)}
+//                   title={`Learn more about ${option}`}
+//                 >
+//                   {`${idx + 1}. ${option}`}
+//                 </div>
+//               ))}
+//             </div>
+//           </>
+//         ) : (
+//           <>
+//             <div
+//               ref={chatContainerRef}
+//               className="overflow-y-auto flex-grow bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-xl p-5 space-y-6 border border-zinc-700 shadow-inner scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent"
+//             >
+//               {chatHistory.map((msg, index) => (
+//                 <div
+//                   key={index}
+//                   className={`w-full flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-up`}
+//                 >
+//                   <div className={`${msg.sender === 'user' ? 'user-message' : 'ai-message'} chat-bubble`}>
+//                     <p>{msg.text}</p>
+//                   </div>
+//                 </div>
+//               ))}
+
+//               {loading && (
+//                 <div className="flex justify-start animate-pulse">
+//                   <div className="max-w-xs px-4 py-2 rounded-xl bg-gray-900 text-white shadow-md">
+//                     AI is typing🤔
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+
+//             <form
+//               onSubmit={sendMessage}
+//               className="mt-4 flex flex-row items-center gap-4 animate-fade-in"
+//             >
+//               <input
+//                 type="text"
+//                 value={message}
+//                 onChange={(e) => setMessage(e.target.value)}
+//                 className="flex-grow px-10 py-10 ml-[10px] mr-[0px] rounded-2xl bg-zinc-950 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-xl placeholder-gray-400 shadow-inner"
+//                 placeholder="Ask something..."
+//               />
+
+//               <button
+//                 type="submit"
+//                 disabled={loading || !message.trim()}
+//                 className="focus:outline-none bg-transparent p-0 m-0 border-none"
+//               >
+//                 <img
+//                   src="/img.png"
+//                   className="w-[55px] h-[80px] ml-[0px] mr=[10px] object-contain hover:scale-105 transition-transform duration-200"
+//                   style={{ border: 'none', background: 'transparent', padding: 0, margin: 0, boxShadow: 'none' }}
+//                 />
+//               </button>
+//             </form>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+
+
+
+
+
+
+// import React, { useState, useEffect, useRef } from 'react';
+// import './App.css';
+
+// const options = [
+//   "International Money Transfer",
+//   "Domestic Money Transfer",
+//   "Foreign Exchange",
+//   "Gold Loan Services",
+//   "Tours & Travel Services",
+//   "Utility & Bill Payments",
+//   "Paul Merchants Franchise/Partner Program",
+//   "Paul Pay App Support",
+//   "KYC and Account Verification",
+//   "Others"
+// ];
+
+// const greetingKeywords = ["hi", "hello", "hey", "good morning", "good evening", "good afternoon"];
+
+// const App = () => {
+//   const [message, setMessage] = useState('');
+//   const [chatHistory, setChatHistory] = useState([]);
+//   const [isChatActive, setIsChatActive] = useState(false);
+//   const [hasWelcomed, setHasWelcomed] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [conversationId, setConversationId] = useState(null);
+//   const chatContainerRef = useRef(null);
+
+//   useEffect(() => {
+//     if (chatContainerRef.current) {
+//       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+//     }
+//   }, [chatHistory]);
+
+//   useEffect(() => {
+//     const storedId = localStorage.getItem("conversationId");
+//     if (!storedId) {
+//       const newId = Date.now().toString();
+//       localStorage.setItem("conversationId", newId);
+//       setConversationId(newId);
+//     } else {
+//       setConversationId(storedId);
+//     }
+//   }, []);
+
+//   const sendMessage = async (event) => {
+//     event.preventDefault();
+//     if (message.trim() === '') return;
+
+//     setLoading(true);
+//     setChatHistory((prevHistory) => [
+//       ...prevHistory,
+//       { sender: 'user', text: message },
+//     ]);
+
+//     const messageLower = message.toLowerCase();
+//     const isGreeting = greetingKeywords.some(keyword => messageLower.includes(keyword));
+
+//     if (isGreeting && !hasWelcomed) {
+//       setHasWelcomed(true);
+//       setIsChatActive(false);
+//       setMessage('');
+//       return;
+//     }
+
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ message, role: 'user', conversation_id: conversationId }),
+//       });
+
+//       if (!response.ok) throw new Error('Error with API request');
+
+//       const data = await response.json();
+//       const newHistory = [
+//         { sender: 'ai', text: data.response },
+//       ];
+
+//       setChatHistory((prev) => [...prev, ...newHistory]);
+//       setMessage('');
+//       setIsChatActive(true);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const handleOptionClick = async (option) => {
+//     if (option === "Others") {
+//       // Reset conversation on "Others"
+//       const newId = Date.now().toString();
+//       localStorage.setItem("conversationId", newId);
+//       setConversationId(newId);
+//       setChatHistory([]);
+//       setIsChatActive(false);
+//       setHasWelcomed(false);
+//       setMessage('');
+//       return;
+//     }
+
+//     setLoading(true);
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({
+//           message: `Tell me about ${option}`,
+//           role: 'user',
+//           conversation_id: conversationId
+//         })
+//       });
+
+//       const data = await response.json();
+//       setChatHistory([{ sender: 'ai', text: data.response }]);
+//       setIsChatActive(true);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="bg-gradient-to-br from-purple-900 via-gray-950 to-black min-h-screen flex items-center justify-center py-10 px-4">
+//       <div className="w-full max-w-[650px] max-h-[95vh] bg-opacity-90 bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-800 p-6 sm:p-8 backdrop-blur-md flex flex-col">
+//         <div className="flex items-center justify-between mb-6">
+//           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-widest animate-fade-in drop-shadow-md ml-[10px]">
+//             PaulBot 🤖
+//           </h1>
+//         </div>
+
+//         {!isChatActive && hasWelcomed ? (
+//           <>
+//             <h2 className="text-white text-lg font-semibold mb-4 ml-[20px] mr-[20px]">What do you want to know about?</h2>
+//             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+//               {options.map((option, idx) => (
+//                 <div
+//                   key={idx}
+//                   className="option-box"
+//                   onClick={() => handleOptionClick(option)}
+//                   title={`Learn more about ${option}`}
+//                 >
+//                   {`${idx + 1}. ${option}`}
+//                 </div>
+//               ))}
+//             </div>
+//           </>
+//         ) : (
+//           <>
+//             <div
+//               ref={chatContainerRef}
+//               className="overflow-y-auto flex-grow bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-xl p-5 space-y-6 border border-zinc-700 shadow-inner scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent"
+//             >
+//               {chatHistory.map((msg, index) => (
+//                 <div
+//                   key={index}
+//                   className={`w-full flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-up`}
+//                 >
+//                   <div className={`${msg.sender === 'user' ? 'user-message' : 'ai-message'} chat-bubble`}>
+//                     <p>{msg.text}</p>
+//                   </div>
+//                 </div>
+//               ))}
+
+//               {loading && (
+//                 <div className="flex justify-start animate-pulse">
+//                   <div className="max-w-xs px-4 py-2 rounded-xl bg-gray-900 text-white shadow-md">
+//                     AI is typing🤔
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+
+//             <form
+//               onSubmit={sendMessage}
+//               className="mt-4 flex flex-row items-center gap-4 animate-fade-in"
+//             >
+//               <input
+//                 type="text"
+//                 value={message}
+//                 onChange={(e) => setMessage(e.target.value)}
+//                 className="flex-grow px-10 py-10 ml-[10px] mr-[0px] rounded-2xl bg-zinc-950 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-xl placeholder-gray-400 shadow-inner"
+//                 placeholder="Ask something..."
+//               />
+
+//               <button
+//                 type="submit"
+//                 disabled={loading || !message.trim()}
+//                 className="focus:outline-none bg-transparent p-0 m-0 border-none"
+//               >
+//                 <img
+//                   src="/img.png"
+//                   className="w-[55px] h-[80px] ml-[0px] mr=[10px] object-contain hover:scale-105 transition-transform duration-200"
+//                   style={{ border: 'none', background: 'transparent', padding: 0, margin: 0, boxShadow: 'none' }}
+//                 />
+//               </button>
+//             </form>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect, useRef } from 'react';
+// import './App.css';
+
+// const options = [
+//   "International Money Transfer",
+//   "Domestic Money Transfer",
+//   "Foreign Exchange",
+//   "Gold Loan Services",
+//   "Tours & Travel Services",
+//   "Utility & Bill Payments",
+//   "Paul Merchants Franchise/Partner Program",
+//   "Paul Pay App Support",
+//   "KYC and Account Verification",
+//   "Others"
+// ];
+
+// const greetingKeywords = ["hi", "hello", "hey", "good morning", "good evening", "good afternoon"];
+
+// const App = () => {
+//   const [message, setMessage] = useState('');
+//   const [chatHistory, setChatHistory] = useState([]);
+//   const [isChatActive, setIsChatActive] = useState(false);
+//   const [hasWelcomed, setHasWelcomed] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [conversationId, setConversationId] = useState(null);
+//   const chatContainerRef = useRef(null);
+
+//   useEffect(() => {
+//     if (chatContainerRef.current) {
+//       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+//     }
+//   }, [chatHistory]);
+
+//   useEffect(() => {
+//     const storedId = localStorage.getItem("conversationId");
+//     if (!storedId) {
+//       const newId = Date.now().toString();
+//       localStorage.setItem("conversationId", newId);
+//       setConversationId(newId);
+//     } else {
+//       setConversationId(storedId);
+//     }
+//   }, []);
+
+//   const sendMessage = async (event) => {
+//     event.preventDefault();
+//     if (message.trim() === '') return;
+
+//     setLoading(true);
+//     setChatHistory((prevHistory) => [
+//       ...prevHistory,
+//       { sender: 'user', text: message },
+//     ]);
+
+//     const messageLower = message.toLowerCase();
+//     const isGreeting = greetingKeywords.some(keyword => messageLower.includes(keyword));
+
+//     if (isGreeting && !hasWelcomed) {
+//       setHasWelcomed(true);
+//       setIsChatActive(false);
+//       setMessage('');
+//       return;
+//     }
+
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ message, role: 'user', conversation_id: conversationId }),
+//       });
+
+//       if (!response.ok) throw new Error('Error with API request');
+
+//       const data = await response.json();
+//       const newHistory = [{ sender: 'ai', text: data.response }];
+
+//       setChatHistory((prev) => [...prev, ...newHistory]);
+//       setMessage('');
+//       setIsChatActive(true);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const handleOptionClick = async (option) => {
+//     if (option === "Others") {
+//       const newId = Date.now().toString();
+//       localStorage.setItem("conversationId", newId);
+//       setConversationId(newId);
+
+//       setChatHistory([]);
+//       setMessage('');
+//       setIsChatActive(false);
+//       setHasWelcomed(false);
+
+//       // Delay to allow re-render of welcome screen
+//       setTimeout(() => setHasWelcomed(true), 100);
+
+//       setLoading(false);
+//       return;
+//     }
+
+//     setLoading(true);
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({
+//           message: `Tell me about ${option}`,
+//           role: 'user',
+//           conversation_id: conversationId
+//         })
+//       });
+
+//       const data = await response.json();
+//       setChatHistory([{ sender: 'ai', text: data.response }]);
+//       setIsChatActive(true);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="bg-gradient-to-br from-purple-900 via-gray-950 to-black min-h-screen flex items-center justify-center py-10 px-4">
+//       <div className="w-full max-w-[650px] max-h-[95vh] bg-opacity-90 bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-800 p-6 sm:p-8 backdrop-blur-md flex flex-col">
+//         <div className="flex items-center justify-between mb-6">
+//           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-widest animate-fade-in drop-shadow-md ml-[10px]">
+//             PaulBot 🤖
+//           </h1>
+//         </div>
+
+//         {!isChatActive && hasWelcomed ? (
+//           <>
+//             <h2 className="text-white text-lg font-semibold mb-4 ml-[20px] mr-[20px]">What do you want to know about?</h2>
+//             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+//               {options.map((option, idx) => (
+//                 <div
+//                   key={idx}
+//                   className="option-box"
+//                   onClick={() => handleOptionClick(option)}
+//                   title={`Learn more about ${option}`}
+//                 >
+//                   {`${idx + 1}. ${option}`}
+//                 </div>
+//               ))}
+//             </div>
+//           </>
+//         ) : (
+//           <>
+//             <div
+//               ref={chatContainerRef}
+//               className="overflow-y-auto flex-grow bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-xl p-5 space-y-6 border border-zinc-700 shadow-inner scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent"
+//             >
+//               {chatHistory.map((msg, index) => (
+//                 <div
+//                   key={index}
+//                   className={`w-full flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-up`}
+//                 >
+//                   <div className={`${msg.sender === 'user' ? 'user-message' : 'ai-message'} chat-bubble`}>
+//                     <p>{msg.text}</p>
+//                   </div>
+//                 </div>
+//               ))}
+
+//               {loading && (
+//                 <div className="flex justify-start animate-pulse">
+//                   <div className="max-w-xs px-4 py-2 rounded-xl bg-gray-900 text-white shadow-md">
+//                     AI is typing🤔
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+
+//             <form
+//               onSubmit={sendMessage}
+//               className="mt-4 flex flex-row items-center gap-4 animate-fade-in"
+//             >
+//               <input
+//                 type="text"
+//                 value={message}
+//                 onChange={(e) => setMessage(e.target.value)}
+//                 className="flex-grow px-10 py-10 ml-[10px] mr-[0px] rounded-2xl bg-zinc-950 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-xl placeholder-gray-400 shadow-inner"
+//                 placeholder="Ask something..."
+//               />
+
+//               <button
+//                 type="submit"
+//                 disabled={loading || !message.trim()}
+//                 className="focus:outline-none bg-transparent p-0 m-0 border-none"
+//               >
+//                 <img
+//                   src="/img.png"
+//                   className="w-[55px] h-[80px] ml-[0px] mr-[10px] object-contain hover:scale-105 transition-transform duration-200"
+//                   style={{ border: 'none', background: 'transparent', padding: 0, margin: 0, boxShadow: 'none' }}
+//                 />
+//               </button>
+//             </form>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+
+
+
+
+// import React, { useState, useEffect, useRef } from 'react';
+// import './App.css';
+
+// const options = [
+//   "International Money Transfer",
+//   "Domestic Money Transfer",
+//   "Foreign Exchange",
+//   "Gold Loan Services",
+//   "Tours & Travel Services",
+//   "Utility & Bill Payments",
+//   "Paul Merchants Franchise/Partner Program",
+//   "Paul Pay App Support",
+//   "KYC and Account Verification",
+//   "Others"
+// ];
+
+// const greetingKeywords = ["hi", "hello", "hey", "good morning", "good evening", "good afternoon"];
+
+// const App = () => {
+//   const [message, setMessage] = useState('');
+//   const [chatHistory, setChatHistory] = useState([]);
+//   const [isChatActive, setIsChatActive] = useState(false);
+//   const [hasWelcomed, setHasWelcomed] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [conversationId, setConversationId] = useState(null);
+//   const chatContainerRef = useRef(null);
+
+//   useEffect(() => {
+//     if (chatContainerRef.current) {
+//       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+//     }
+//   }, [chatHistory]);
+
+//   useEffect(() => {
+//     const storedId = localStorage.getItem("conversationId");
+//     if (!storedId) {
+//       const newId = Date.now().toString();
+//       localStorage.setItem("conversationId", newId);
+//       setConversationId(newId);
+//     } else {
+//       setConversationId(storedId);
+//     }
+//   }, []);
+
+//   const sendMessage = async (event) => {
+//     event.preventDefault();
+//     if (message.trim() === '') return;
+
+//     setLoading(true);
+//     setChatHistory((prevHistory) => [
+//       ...prevHistory,
+//       { sender: 'user', text: message },
+//     ]);
+
+//     const messageLower = message.toLowerCase();
+//     const isGreeting = greetingKeywords.some(keyword => messageLower.includes(keyword));
+
+//     if (isGreeting && !hasWelcomed) {
+//       setHasWelcomed(true);
+//       setIsChatActive(false);
+//       setMessage('');
+//       return;
+//     }
+
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ message, role: 'user', conversation_id: conversationId }),
+//       });
+
+//       if (!response.ok) throw new Error('Error with API request');
+
+//       const data = await response.json();
+//       const newHistory = [
+//         { sender: 'ai', text: data.response },
+//       ];
+
+//       setChatHistory((prev) => [...prev, ...newHistory]);
+//       setMessage('');
+//       setIsChatActive(true);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const handleOptionClick = async (option) => {
+//     if (option === "Others") {
+//       // Restart conversation
+//       const newId = Date.now().toString();
+//       localStorage.setItem("conversationId", newId);
+//       setConversationId(newId);
+//       setChatHistory([]);
+//       setMessage('');
+//       setIsChatActive(true);
+//       setHasWelcomed(true);
+//       return;
+//     }
+
+//     setLoading(true);
+//     try {
+//       const response = await fetch(`http://localhost:8000/chat/`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({
+//           message: `Tell me about ${option}`,
+//           role: 'user',
+//           conversation_id: conversationId
+//         })
+//       });
+
+//       const data = await response.json();
+//       setChatHistory([{ sender: 'ai', text: data.response }]);
+//       setIsChatActive(true);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="bg-gradient-to-br from-purple-900 via-gray-950 to-black min-h-screen flex items-center justify-center py-10 px-4">
+//       <div className="w-full max-w-[650px] max-h-[95vh] bg-opacity-90 bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-800 p-6 sm:p-8 backdrop-blur-md flex flex-col">
+//         <div className="flex items-center justify-between mb-6">
+//           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-widest animate-fade-in drop-shadow-md ml-[10px]">
+//             PaulBot 🤖
+//           </h1>
+//         </div>
+
+//         {!isChatActive && hasWelcomed ? (
+//           <>
+//             <h2 className="text-white text-lg font-semibold mb-4 ml-[20px] mr-[20px]">What do you want to know about?</h2>
+//             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+//               {options.map((option, idx) => (
+//                 <div
+//                   key={idx}
+//                   className="option-box"
+//                   onClick={() => handleOptionClick(option)}
+//                   title={`Learn more about ${option}`}
+//                 >
+//                   {`${idx + 1}. ${option}`}
+//                 </div>
+//               ))}
+//             </div>
+//           </>
+//         ) : (
+//           <>
+//             <div
+//               ref={chatContainerRef}
+//               className="overflow-y-auto flex-grow bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-xl p-5 space-y-6 border border-zinc-700 shadow-inner scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent"
+//             >
+//               {chatHistory.map((msg, index) => (
+//                 <div
+//                   key={index}
+//                   className={`w-full flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-up`}
+//                 >
+//                   <div className={`${msg.sender === 'user' ? 'user-message' : 'ai-message'} chat-bubble`}>
+//                     <p>{msg.text}</p>
+//                   </div>
+//                 </div>
+//               ))}
+
+//               {loading && (
+//                 <div className="flex justify-start animate-pulse">
+//                   <div className="max-w-xs px-4 py-2 rounded-xl bg-gray-900 text-white shadow-md">
+//                     AI is typing🤔
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+
+//             <form
+//               onSubmit={sendMessage}
+//               className="mt-4 flex flex-row items-center gap-4 animate-fade-in"
+//             >
+//               <input
+//                 type="text"
+//                 value={message}
+//                 onChange={(e) => setMessage(e.target.value)}
+//                 className="flex-grow px-10 py-10 ml-[10px] mr-[0px] rounded-2xl bg-zinc-950 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-xl placeholder-gray-400 shadow-inner"
+//                 placeholder="Ask something..."
+//               />
+
+//               <button
+//                 type="submit"
+//                 disabled={loading || !message.trim()}
+//                 className="focus:outline-none bg-transparent p-0 m-0 border-none"
+//               >
+//                 <img
+//                   src="/img.png"
+//                   className="w-[55px] h-[80px] ml-[0px] mr-[10px] object-contain hover:scale-105 transition-transform duration-200"
+//                   style={{ border: 'none', background: 'transparent', padding: 0, margin: 0, boxShadow: 'none' }}
+//                   alt="Send"
+//                 />
+//               </button>
+//             </form>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+
+
+
+
+
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
+
+const options = [
+  "International Money Transfer",
+  "Domestic Money Transfer",
+  "Foreign Exchange",
+  "Gold Loan Services",
+  "Tours & Travel Services",
+  "Utility & Bill Payments",
+  "Paul Merchants Franchise/Partner Program",
+  "Paul Pay App Support",
+  "KYC and Account Verification",
+  "Others"
+];
+
+const greetingKeywords = ["hi", "hello", "hey", "good morning", "good evening", "good afternoon"];
 
 const App = () => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
-  const [isChatActive, setIsChatActive] = useState(true);
+  const [isChatActive, setIsChatActive] = useState(false);
+  const [hasWelcomed, setHasWelcomed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [conversationId, setConversationId] = useState(null);
   const chatContainerRef = useRef(null);
@@ -725,35 +2121,107 @@ const App = () => {
   }, [chatHistory]);
 
   useEffect(() => {
-    if (!conversationId) {
-      setConversationId(Date.now().toString());
+    const storedId = localStorage.getItem("conversationId");
+    if (!storedId) {
+      const newId = Date.now().toString();
+      localStorage.setItem("conversationId", newId);
+      setConversationId(newId);
+    } else {
+      setConversationId(storedId);
     }
-  }, [conversationId]);
+  }, []);
 
   const sendMessage = async (event) => {
     event.preventDefault();
     if (message.trim() === '') return;
 
     setLoading(true);
-    setChatHistory((prevHistory) => [
-      ...prevHistory,
-      { sender: 'user', text: message },
-    ]);
+    setChatHistory((prevHistory) => [...prevHistory, { sender: 'user', text: message }]);
+
+    const messageLower = message.toLowerCase();
+    const isGreeting = greetingKeywords.some(keyword => messageLower.includes(keyword));
+
+    if (isGreeting && !hasWelcomed) {
+      setHasWelcomed(true);
+      setIsChatActive(false);
+      setMessage('');
+      setLoading(false);
+      return;
+    }
 
     try {
       const response = await fetch(`http://localhost:8000/chat/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message, conversation_id: conversationId }),
+        body: JSON.stringify({ message, role: 'user', conversation_id: conversationId }),
       });
 
       if (!response.ok) throw new Error('Error with API request');
 
       const data = await response.json();
-      setChatHistory((prevHistory) => [
-        ...prevHistory,
-        { sender: 'ai', text: data.response },
-      ]);
+
+      // Update conversationId if changed by backend (e.g., after "others")
+      if (data.conversation_id && data.conversation_id !== conversationId) {
+        localStorage.setItem("conversationId", data.conversation_id);
+        setConversationId(data.conversation_id);
+      }
+
+      setChatHistory(prev => [...prev, { sender: 'ai', text: data.response }]);
+      setMessage('');
+      setIsChatActive(true);
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleOptionClick = async (option) => {
+    setLoading(true);
+    if (option === "Others") {
+      try {
+        const response = await fetch(`http://localhost:8000/chat/`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: "others",
+            role: "user",
+            conversation_id: conversationId
+          })
+        });
+
+        const data = await response.json();
+
+        // Update conversationId with new one from backend
+        localStorage.setItem("conversationId", data.conversation_id);
+        setConversationId(data.conversation_id);
+
+        setChatHistory([{ sender: 'ai', text: data.response }]);
+        setIsChatActive(true);
+        setHasWelcomed(true);
+        setMessage('');
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:8000/chat/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: `Tell me about ${option}`,
+          role: 'user',
+          conversation_id: conversationId
+        })
+      });
+
+      const data = await response.json();
+      setChatHistory([{ sender: 'ai', text: data.response }]);
+      setIsChatActive(true);
       setMessage('');
     } catch (error) {
       console.error('Error:', error);
@@ -771,63 +2239,74 @@ const App = () => {
           </h1>
         </div>
 
-        <div
-          ref={chatContainerRef}
-          className="overflow-y-auto flex-grow bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-xl p-5 space-y-6 border border-zinc-700 shadow-inner scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent"
-        >
-          {chatHistory.map((msg, index) => (
+        {!isChatActive && hasWelcomed ? (
+          <>
+            <h2 className="text-white text-lg font-semibold mb-4 ml-[20px] mr-[20px]">What do you want to know about?</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {options.map((option, idx) => (
+                <div
+                  key={idx}
+                  className="option-box"
+                  onClick={() => handleOptionClick(option)}
+                  title={`Learn more about ${option}`}
+                >
+                  {`${idx + 1}. ${option}`}
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
             <div
-              key={index}
-              className={`w-full flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-up`}
+              ref={chatContainerRef}
+              className="overflow-y-auto flex-grow bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-xl p-5 space-y-6 border border-zinc-700 shadow-inner scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent"
             >
-              <div className={`${msg.sender === 'user' ? 'user-message' : 'ai-message'} chat-bubble`}>
-                <p>{msg.text}</p>
-              </div>
+              {chatHistory.map((msg, index) => (
+                <div
+                  key={index}
+                  className={`w-full flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-up`}
+                >
+                  <div className={`${msg.sender === 'user' ? 'user-message' : 'ai-message'} chat-bubble`}>
+                    <p>{msg.text}</p>
+                  </div>
+                </div>
+              ))}
+
+              {loading && (
+                <div className="flex justify-start animate-pulse">
+                  <div className="max-w-xs px-4 py-2 rounded-xl bg-gray-900 text-white shadow-md">
+                    AI is typing🤔
+                  </div>
+                </div>
+              )}
             </div>
-          ))}
 
-          {loading && (
-            <div className="flex justify-start animate-pulse">
-              <div className="max-w-xs px-4 py-2 rounded-xl bg-gray-900 text-white shadow-md">
-                AI is typing...
-              </div>
-            </div>
-          )}
-        </div>
-
-        {isChatActive && (
-          <form
-            onSubmit={sendMessage}
-            className="mt-4 flex flex-row items-center gap-4 animate-fade-in"
-          >
-            <input
-              type="text"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="flex-grow px-10 py-10 rounded-2xl bg-zinc-950 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-xl placeholder-gray-400 shadow-inner"
-              // className="flex-grow px-10 py-7 rounded-2xl bg-zinc-950 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-base placeholder-gray-500 shadow-inner"
-              placeholder="Ask something..."
-            />
-
-            <button
-              type="submit"
-              disabled={loading || !message.trim()}
-              className="focus:outline-none"
+            <form
+              onSubmit={sendMessage}
+              className="mt-4 flex flex-row items-center gap-4 animate-fade-in"
             >
-              <img
-                src="/img.png"
-                alt="Send"
-                className="w-[50px] h-[55px] object-contain hover:scale-105 transition-transform duration-200"
-                style={{
-                  border: 'none',
-                  background: 'transparent',
-                  padding: 0,
-                  margin: 0,
-                  boxShadow: 'none',
-                }}
+              <input
+                type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="flex-grow px-10 py-10 ml-[10px] mr-[0px] rounded-2xl bg-zinc-950 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-xl placeholder-gray-400 shadow-inner"
+                placeholder="Ask something..."
               />
-            </button>
-          </form>
+
+              <button
+                type="submit"
+                disabled={loading || !message.trim()}
+                className="focus:outline-none bg-transparent p-0 m-0 border-none"
+              >
+                <img
+                  src="/img.png"
+                  className="w-[55px] h-[80px] ml-[0px] mr-[10px] object-contain hover:scale-105 transition-transform duration-200"
+                  style={{ border: 'none', background: 'transparent', padding: 0, margin: 0, boxShadow: 'none' }}
+                  alt="Send"
+                />
+              </button>
+            </form>
+          </>
         )}
       </div>
     </div>
